@@ -1,9 +1,8 @@
-package salestaxes;
+package com.incalza.dojo.salestaxes;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import static java.math.BigDecimal.ROUND_HALF_UP;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
 

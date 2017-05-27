@@ -1,8 +1,6 @@
-package salestaxes;
+package com.incalza.dojo.salestaxes;
 
 import java.math.BigDecimal;
-
-import static java.math.BigDecimal.valueOf;
 
 /**
  * Created by sincalza on 26/05/2017.

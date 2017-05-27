@@ -1,17 +1,16 @@
 package com.incalza.dojo.salestaxes;
 
 import org.junit.Test;
-import salestaxes.*;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static salestaxes.ProductType.*;
+import static com.incalza.dojo.salestaxes.Product.Type.*;
 
 /**
  * Created by sincalza on 26/05/2017.
  */
-public class AcceptanceCriteria {
+public class AcceptanceCriteriaTest {
 
     @Test
     public void firstTestCase() throws Exception {
@@ -27,9 +26,9 @@ public class AcceptanceCriteria {
 //        Sales Taxes: 1.50
 //        Total: 29.83
 
-        Product product1 = new Product("book", new BigDecimal("12.49"), book);
-        Product product2 = new Product("music CD", new BigDecimal("14.99"), music);
-        Product product3 = new Product("chocolate bar", new BigDecimal("0.85"), food);
+        Product product1 = new Product(new BigDecimal("12.49"), "book", book);
+        Product product2 = new Product(new BigDecimal("14.99"), "music CD", music);
+        Product product3 = new Product(new BigDecimal("0.85"), "chocolate bar", food);
         Basket basket = new Basket(new BasicTaxCalculator());
         basket.put(product1, product2, product3);
 
@@ -56,8 +55,8 @@ public class AcceptanceCriteria {
 //        Sales Taxes: 7.65
 //        Total: 65.15
 
-        Product product1 = new Product("box of chocolates", new BigDecimal("10.00"), food, true);
-        Product product2 = new Product("bottle of perfume", new BigDecimal("47.50"), perfume, true);
+        Product product1 = new Product(new BigDecimal("10.00"), "box of chocolates", food, true);
+        Product product2 = new Product(new BigDecimal("47.50"), "bottle of perfume", perfume, true);
 
         final ChainOfTaxCalculator salesTaxes = new ChainOfTaxCalculator(new BasicTaxCalculator(), new ImportTaxCalculator());
         Basket basket = new Basket(salesTaxes).put(product1, product2);
@@ -94,10 +93,10 @@ public class AcceptanceCriteria {
 //        Sales Taxes: 6.70
 //        Total: 74.68
 
-        Product product1 = new Product("imported bottle of perfume", new BigDecimal("27.99"), perfume, true);
-        Product product2 = new Product("bottle of perfume", new BigDecimal("18.99"), perfume, false);
-        Product product3 = new Product("packet of headache pills", new BigDecimal("9.75"), medicinal, false);
-        Product product4 = new Product("box of imported chocolates", new BigDecimal("11.25"), food, true);
+        Product product1 = new Product(new BigDecimal("27.99"), "imported bottle of perfume", perfume, true);
+        Product product2 = new Product(new BigDecimal("18.99"), "bottle of perfume", perfume, false);
+        Product product3 = new Product(new BigDecimal("9.75"), "packet of headache pills", medicinal, false);
+        Product product4 = new Product(new BigDecimal("11.25"), "box of imported chocolates", food, true);
 
         final ChainOfTaxCalculator salesTaxes = new ChainOfTaxCalculator(new BasicTaxCalculator(), new ImportTaxCalculator());
         Basket basket = new Basket(salesTaxes);

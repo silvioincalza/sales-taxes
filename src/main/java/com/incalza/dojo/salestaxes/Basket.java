@@ -1,11 +1,11 @@
-package salestaxes;
+package com.incalza.dojo.salestaxes;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
-import static salestaxes.Assert.hasItems;
+import static com.incalza.dojo.salestaxes.Assert.hasItems;
 
 /**
  * Created by sincalza on 26/05/2017.
@@ -28,13 +28,13 @@ public class Basket {
 
     public BigDecimal total() {
         return products.stream()
-                .map(product -> new ProductWithSalesTaxes(product).getPricePlusSalesTaxes(taxCalculator))
+                .map(product -> new ProductWithSalesTaxes(product, taxCalculator).getPricePlusSalesTaxes())
                 .reduce(ZERO, BigDecimal::add);
     }
 
     public BigDecimal salesTaxes() {
         return products.stream()
-                .map(v -> new ProductWithSalesTaxes(v).getSalesTaxes(taxCalculator))
+                .map(v -> new ProductWithSalesTaxes(v, taxCalculator).getSalesTaxes())
                 .reduce(ZERO, BigDecimal::add);
     }
 }

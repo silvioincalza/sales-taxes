@@ -1,11 +1,11 @@
-package salestaxes;
+package com.incalza.dojo.salestaxes;
 
 import java.math.BigDecimal;
 
 import static java.lang.Math.ceil;
 import static java.math.BigDecimal.valueOf;
 
-public class PriceUtils {
+public class MathOperationUtils {
 
     private static final BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100.0);
     private static final BigDecimal FIVE_CENTS = valueOf(0.05);
