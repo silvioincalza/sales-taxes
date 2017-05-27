@@ -23,7 +23,7 @@ public class BasicTaxCalculator implements TaxCalculator {
         if (isAProductInException(product)) return ZERO;
         return roundOffToFiveCents(product.getPriceOfPercentOf(TEN));
     }
-    
+
     private boolean isAProductInException(Product product) {
         return PRODUCT_TYPES_EXCEPTION.contains(product.getType());
     }

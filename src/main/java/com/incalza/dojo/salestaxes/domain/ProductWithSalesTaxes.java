@@ -20,5 +20,5 @@ public class ProductWithSalesTaxes extends Product {
     public BigDecimal getSalesTaxes() {
         return taxCalculator.apply(this);
     }
-    
+
 }

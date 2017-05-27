@@ -1,19 +1,16 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.domain;
 
-import com.incalza.dojo.salestaxes.domain.Product;
-import com.incalza.dojo.salestaxes.domain.ProductWithSalesTaxes;
-import com.incalza.dojo.salestaxes.domain.TaxCalculator;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static com.incalza.dojo.salestaxes.domain.Product.Type.not_available;
 import static java.math.BigDecimal.ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static com.incalza.dojo.salestaxes.domain.Product.Type.not_available;
 
 /**
  * Created by sincalza on 27/05/2017.

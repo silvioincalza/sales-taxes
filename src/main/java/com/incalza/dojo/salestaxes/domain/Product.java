@@ -1,6 +1,7 @@
 package com.incalza.dojo.salestaxes.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Created by sincalza on 26/05/2017.
@@ -53,5 +54,21 @@ public class Product {
 
     public BigDecimal getPriceOfPercentOf(BigDecimal percentOf) {
         return price.multiply(percentOf).divide(ONE_HUNDRED);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return imported == product.imported &&
+                Objects.equals(description, product.description) &&
+                Objects.equals(price, product.price) &&
+                type == product.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, price, type, imported);
     }
 }

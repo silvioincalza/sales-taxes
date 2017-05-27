@@ -1,8 +1,5 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.domain;
 
-import com.incalza.dojo.salestaxes.domain.BasicTaxCalculator;
-import com.incalza.dojo.salestaxes.domain.Product;
-import com.incalza.dojo.salestaxes.domain.TaxCalculator;
 import org.junit.Test;
 
 import java.math.BigDecimal;

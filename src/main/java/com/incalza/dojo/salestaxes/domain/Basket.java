@@ -1,10 +1,8 @@
 package com.incalza.dojo.salestaxes.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static com.incalza.dojo.salestaxes.utils.Asserts.hasItems;
-import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
 
 /**
@@ -14,10 +12,10 @@ public class Basket {
 
     private List<Product> products;
 
-    private TaxCalculator taxCalculator;
+    private final OrderFactory orderFactory;
 
-    public Basket(TaxCalculator taxCalculator) {
-        this.taxCalculator = taxCalculator;
+    public Basket(OrderFactory orderFactory) {
+        this.orderFactory = orderFactory;
     }
 
     public Basket put(Product... products) {
@@ -26,15 +24,8 @@ public class Basket {
         return this;
     }
 
-    public BigDecimal total() {
-        return products.stream()
-                .map(product -> new ProductWithSalesTaxes(product, taxCalculator).getPricePlusSalesTaxes())
-                .reduce(ZERO, BigDecimal::add);
-    }
 
-    public BigDecimal salesTaxes() {
-        return products.stream()
-                .map(v -> new ProductWithSalesTaxes(v, taxCalculator).getSalesTaxes())
-                .reduce(ZERO, BigDecimal::add);
+    public Order checkOut() {
+        return orderFactory.placeOrder(products);
     }
 }
