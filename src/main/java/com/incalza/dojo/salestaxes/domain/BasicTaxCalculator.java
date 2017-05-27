@@ -1,8 +1,14 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.domain;
+
+import com.incalza.dojo.salestaxes.domain.Product;
+import com.incalza.dojo.salestaxes.domain.Product.Type;
+import com.incalza.dojo.salestaxes.domain.TaxCalculator;
+import com.incalza.dojo.salestaxes.utils.MathOperationUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
 import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
 
@@ -11,7 +17,7 @@ import static java.util.Arrays.asList;
  */
 public class BasicTaxCalculator implements TaxCalculator {
 
-    private static final List<Product.Type> PRODUCT_TYPES_EXCEPTION = asList(Product.Type.food, Product.Type.medicinal, Product.Type.book);
+    private static final List<Type> PRODUCT_TYPES_EXCEPTION = asList(food, medicinal, book);
 
     @Override
     public BigDecimal apply(Product product) {

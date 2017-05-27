@@ -1,11 +1,12 @@
 package com.incalza.dojo.salestaxes;
 
+import com.incalza.dojo.salestaxes.domain.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.incalza.dojo.salestaxes.Product.Type.*;
+import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
 
 /**
  * Created by sincalza on 26/05/2017.

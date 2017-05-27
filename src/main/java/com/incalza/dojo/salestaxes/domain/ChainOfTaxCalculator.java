@@ -1,4 +1,6 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.domain;
+
+import com.incalza.dojo.salestaxes.utils.Asserts;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,7 +15,7 @@ public class ChainOfTaxCalculator implements TaxCalculator {
     private final List<TaxCalculator> taxCalculators;
 
     public ChainOfTaxCalculator(TaxCalculator... taxCalculators) {
-        Assert.hasItems("Tax Calculator cannot be empty, put one of a Tax Calculator instance at least.", taxCalculators);
+        Asserts.hasItems("Tax Calculator cannot be empty, put one of a Tax Calculator instance at least.", taxCalculators);
         this.taxCalculators = asList(taxCalculators);
     }
 

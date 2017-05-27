@@ -1,4 +1,4 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.domain;
 
 import java.math.BigDecimal;
 

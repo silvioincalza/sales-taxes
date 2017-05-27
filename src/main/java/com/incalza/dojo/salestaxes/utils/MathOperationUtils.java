@@ -1,4 +1,4 @@
-package com.incalza.dojo.salestaxes;
+package com.incalza.dojo.salestaxes.utils;
 
 import java.math.BigDecimal;
 
