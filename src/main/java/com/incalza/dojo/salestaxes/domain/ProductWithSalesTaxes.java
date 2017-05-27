@@ -13,7 +13,6 @@ public class ProductWithSalesTaxes extends Product {
         this.taxCalculator = taxCalculator;
     }
 
-
     public BigDecimal getPricePlusSalesTaxes() {
         return getPrice().add(taxCalculator.apply(this));
     }
@@ -21,6 +20,5 @@ public class ProductWithSalesTaxes extends Product {
     public BigDecimal getSalesTaxes() {
         return taxCalculator.apply(this);
     }
-
-
+    
 }

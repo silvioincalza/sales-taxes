@@ -3,9 +3,9 @@ package com.incalza.dojo.salestaxes.domain;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.incalza.dojo.salestaxes.utils.Asserts.hasItems;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
-import static com.incalza.dojo.salestaxes.utils.Asserts.hasItems;
 
 /**
  * Created by sincalza on 26/05/2017.

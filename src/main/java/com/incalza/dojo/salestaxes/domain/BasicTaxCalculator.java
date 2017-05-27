@@ -1,8 +1,6 @@
 package com.incalza.dojo.salestaxes.domain;
 
-import com.incalza.dojo.salestaxes.domain.Product;
 import com.incalza.dojo.salestaxes.domain.Product.Type;
-import com.incalza.dojo.salestaxes.domain.TaxCalculator;
 import com.incalza.dojo.salestaxes.utils.MathOperationUtils;
 
 import java.math.BigDecimal;
