@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AcceptanceCriteriaTest {
 
+    private final OrderFactory orderFactory = new OrderFactory(new ChainOfTaxCalculator(new BasicTaxCalculator(), new ImportTaxCalculator()));
+
     @Test
     public void firstTestCase() throws Exception {
 //        Input 1:
@@ -30,7 +32,7 @@ public class AcceptanceCriteriaTest {
         Product product1 = new Product(new BigDecimal("12.49"), "book", book);
         Product product2 = new Product(new BigDecimal("14.99"), "music CD", music);
         Product product3 = new Product(new BigDecimal("0.85"), "chocolate bar", food);
-        Basket basket = new Basket(new OrderFactory(new BasicTaxCalculator()));
+        Basket basket = new Basket(orderFactory);
         basket.put(product1, product2, product3);
 
         assertThat(basket.checkOut().salesTaxes())
@@ -59,8 +61,8 @@ public class AcceptanceCriteriaTest {
         Product product1 = new Product(new BigDecimal("10.00"), "box of chocolates", food, true);
         Product product2 = new Product(new BigDecimal("47.50"), "bottle of perfume", perfume, true);
 
-        final ChainOfTaxCalculator salesTaxes = new ChainOfTaxCalculator(new BasicTaxCalculator(), new ImportTaxCalculator());
-        Basket basket = new Basket(new OrderFactory(salesTaxes)).put(product1, product2);
+
+        Basket basket = new Basket(orderFactory).put(product1, product2);
 
         assertThat(basket.checkOut().salesTaxes())
                 .withFailMessage("salesTaxes not matched")
@@ -93,8 +95,7 @@ public class AcceptanceCriteriaTest {
         Product product3 = new Product(new BigDecimal("9.75"), "packet of headache pills", medicinal, false);
         Product product4 = new Product(new BigDecimal("11.25"), "box of imported chocolates", food, true);
 
-        final ChainOfTaxCalculator salesTaxes = new ChainOfTaxCalculator(new BasicTaxCalculator(), new ImportTaxCalculator());
-        Basket basket = new Basket(new OrderFactory(salesTaxes));
+        Basket basket = new Basket(orderFactory);
 
         basket.put(product1, product2, product3, product4);
 
