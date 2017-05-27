@@ -1,10 +1,8 @@
 package com.incalza.dojo.salestaxes.domain;
 
-import com.incalza.dojo.salestaxes.utils.MathOperationUtils;
-
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import static com.incalza.dojo.salestaxes.utils.MathOperationUtils.roundOffToFiveCents;
 import static java.math.BigDecimal.ZERO;
 
 /**
@@ -12,12 +10,11 @@ import static java.math.BigDecimal.ZERO;
  */
 public class ImportTaxCalculator implements TaxCalculator {
 
+    private static final BigDecimal FIVE = BigDecimal.valueOf(5.0);
 
     @Override
     public BigDecimal apply(Product product) {
         if (!product.isImported()) return ZERO;
-        return MathOperationUtils.roundOffToFiveCents(
-                MathOperationUtils.percentOf(product.getPrice(), MathOperationUtils.FIVE)
-        ).setScale(2, ROUND_HALF_UP);
+        return roundOffToFiveCents(product.getPriceOfPercentOf(FIVE));
     }
 }

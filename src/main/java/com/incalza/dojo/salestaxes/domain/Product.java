@@ -7,6 +7,8 @@ import java.math.BigDecimal;
  */
 public class Product {
 
+    private static final BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100.0);
+
     public enum Type {
         music,
         book,
@@ -47,5 +49,9 @@ public class Product {
 
     public boolean isImported() {
         return imported;
+    }
+
+    public BigDecimal getPriceOfPercentOf(BigDecimal percentOf) {
+        return price.multiply(percentOf).divide(ONE_HUNDRED);
     }
 }

@@ -1,13 +1,14 @@
 package com.incalza.dojo.salestaxes.domain;
 
 import com.incalza.dojo.salestaxes.domain.Product.Type;
-import com.incalza.dojo.salestaxes.utils.MathOperationUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
-import static java.math.BigDecimal.*;
+import static com.incalza.dojo.salestaxes.utils.MathOperationUtils.roundOffToFiveCents;
+import static java.math.BigDecimal.TEN;
+import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
 
 /**
@@ -20,12 +21,9 @@ public class BasicTaxCalculator implements TaxCalculator {
     @Override
     public BigDecimal apply(Product product) {
         if (isAProductInException(product)) return ZERO;
-        return MathOperationUtils.roundOffToFiveCents(
-                MathOperationUtils.percentOf(product.getPrice(), TEN)
-        ).setScale(2, ROUND_HALF_UP);
+        return roundOffToFiveCents(product.getPriceOfPercentOf(TEN));
     }
-
-
+    
     private boolean isAProductInException(Product product) {
         return PRODUCT_TYPES_EXCEPTION.contains(product.getType());
     }
