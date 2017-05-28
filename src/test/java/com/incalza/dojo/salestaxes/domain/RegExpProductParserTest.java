@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -19,6 +20,7 @@ public class RegExpProductParserTest {
     @Test
     public void nothingToParse() throws Exception {
         assertThat(productParser.parse(empty())).isEmpty();
+        assertThat(productParser.parse(ofNullable(null))).isEmpty();
         assertThat(productParser.parse(of("agsdfgsfgwqectqwxqeqw"))).isEmpty();
         assertThat(productParser.parse(of(""))).isEmpty();
     }
