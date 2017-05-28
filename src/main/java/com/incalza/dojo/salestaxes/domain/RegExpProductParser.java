@@ -17,10 +17,10 @@ public class RegExpProductParser implements ProductParser<String> {
     public Optional<Product> parse(Optional<String> productLine) {
         return productLine.map(line -> {
             final Matcher matcher = REGEXP_PRODUCT_LINE.matcher(line);
+            if (!matcher.find()) return null;
             final String description = matcher.group(3);
             final String price = matcher.group(4);
-            return !matcher.find() ? null :
-                    new Product(new BigDecimal(price), description, parseType(description));
+            return new Product(new BigDecimal(price), description, parseType(description));
         });
     }
 
