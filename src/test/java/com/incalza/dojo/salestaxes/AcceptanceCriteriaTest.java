@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AcceptanceCriteriaTest {
 
     private final OrderFactory orderFactory = new OrderFactory(
-            new ChainOfTaxCalculator(
+            new CompositeTaxCalculator(
                     new BasicTaxCalculator(),
                     new ImportationTaxCalculator()
             )
