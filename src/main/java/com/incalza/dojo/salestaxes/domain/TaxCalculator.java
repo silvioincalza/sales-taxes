@@ -11,5 +11,5 @@ public interface TaxCalculator {
 
     BigDecimal apply(Product product);
 
-    TaxCalculator NONE = product -> ZERO;
+    TaxCalculator NOP = product -> ZERO;
 }
