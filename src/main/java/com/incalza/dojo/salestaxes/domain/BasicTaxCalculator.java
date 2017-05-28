@@ -20,7 +20,7 @@ public class BasicTaxCalculator extends RoundOffToFiveCentsTaxCalculator {
     @Override
     public BigDecimal doApply(Product product) {
         if (isAProductInException(product)) return ZERO;
-        return product.getPriceOfPercentOf(TEN);
+        return product.getPercentOfPrice(TEN);
     }
 
     private boolean isAProductInException(Product product) {

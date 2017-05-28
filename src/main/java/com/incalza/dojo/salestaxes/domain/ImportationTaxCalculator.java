@@ -14,6 +14,6 @@ public class ImportationTaxCalculator extends RoundOffToFiveCentsTaxCalculator {
     @Override
     public BigDecimal doApply(Product product) {
         if (!product.isImported()) return ZERO;
-        return product.getPriceOfPercentOf(FIVE);
+        return product.getPercentOfPrice(FIVE);
     }
 }

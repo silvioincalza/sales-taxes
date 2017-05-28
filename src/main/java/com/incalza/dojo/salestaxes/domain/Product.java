@@ -51,7 +51,7 @@ public class Product extends Model {
         return imported;
     }
 
-    public BigDecimal getPriceOfPercentOf(BigDecimal percentOf) {
+    public BigDecimal getPercentOfPrice(BigDecimal percentOf) {
         return price.multiply(percentOf).divide(ONE_HUNDRED);
     }
 

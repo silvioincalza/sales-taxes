@@ -15,7 +15,7 @@ public class ProductTest {
     @Test
     public void getPriceOfPercentOf() throws Exception {
         Product product = new Product(TEN, "none", not_available);
-        assertThat(product.getPriceOfPercentOf(TEN))
+        assertThat(product.getPercentOfPrice(TEN))
                 .isEqualByComparingTo(ONE);
     }
 
