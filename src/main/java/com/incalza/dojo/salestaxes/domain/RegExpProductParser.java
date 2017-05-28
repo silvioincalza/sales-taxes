@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 import static java.util.regex.Pattern.compile;
 
 /**
@@ -12,24 +14,26 @@ import static java.util.regex.Pattern.compile;
  */
 public class RegExpProductParser implements ProductParser<String> {
     public static final String REG_EXP_NUM_OF_PRODUCTS = "(\\d{1,3})";
-    public static final String REG_EXP_DESCRIPTION = "([a-zA-Z]+)";
+    public static final String REG_EXP_DESCRIPTION = "([a-zA-Z\\s_-]+)";
     public static final String REG_EXP_PRICE = "(\\d{1,11}(.\\d{1,2})?)";
     public static final Pattern REG_EXP_PRODUCT_LINE = compile("(" + REG_EXP_NUM_OF_PRODUCTS +
             "[\\s\\t]" + REG_EXP_DESCRIPTION + "[\\s\\t]at[\\s\\t]" + REG_EXP_PRICE + ")");
 
     @Override
     public Optional<Product> parse(Optional<String> productLine) {
-        return productLine.map(line -> {
+        return productLine.flatMap(line -> {
             final Matcher matcher = REG_EXP_PRODUCT_LINE.matcher(line);
-            if (!matcher.find()) return null;
+            if (!matcher.find()) return empty();
             final String description = matcher.group(3);
             final String price = matcher.group(4);
-            return new Product(new BigDecimal(price), description, parseType(description));
+            return of(new Product(new BigDecimal(price), description, parseType(description), description.contains("imported")));
         });
     }
 
     private Product.Type parseType(String description) {
         if (description.contains("book")) return Product.Type.book;
+        if (description.contains("chocolate")) return Product.Type.food;
+
         return Product.Type.not_available;
     }
 

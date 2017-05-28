@@ -1,5 +1,7 @@
 package com.incalza.dojo.salestaxes.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -72,5 +74,16 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(description, price, type, imported);
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("description", description)
+                .append("price", price)
+                .append("type", type)
+                .append("imported", imported)
+                .toString();
     }
 }
