@@ -3,10 +3,9 @@ package com.incalza.dojo.salestaxes.domain;
 import java.io.Reader;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
+import static com.incalza.dojo.salestaxes.domain.RegExpProductParser.REG_EXP_PRODUCT_LINE;
 import static java.util.Optional.ofNullable;
-import static java.util.regex.Pattern.compile;
 
 /**
  * Created by sincalza on 27/05/2017.
@@ -14,7 +13,6 @@ import static java.util.regex.Pattern.compile;
 public class TextualProductReader implements ProductReader {
 
     private final Scanner scanner;
-    private static final Pattern PRODUCT_LINE = compile("((\\d)+[\\s\\t]([a-zA-Z])+[\\s\\t]at[\\s\\t](\\d{1,11}(.\\d{1,2})?))");
     private final RegExpProductParser regExpProductParser = new RegExpProductParser();
 
     public TextualProductReader(Reader reader) {
@@ -25,7 +23,7 @@ public class TextualProductReader implements ProductReader {
     public Optional<Product> read() {
         return regExpProductParser.parse(
                 ofNullable(
-                        scanner.findInLine(PRODUCT_LINE)
+                        scanner.findInLine(REG_EXP_PRODUCT_LINE)
                 )
         );
     }
