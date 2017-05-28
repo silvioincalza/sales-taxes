@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
-import static com.incalza.dojo.salestaxes.utils.MathOperationUtils.roundOffToFiveCents;
 import static java.math.BigDecimal.TEN;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
@@ -14,14 +13,14 @@ import static java.util.Arrays.asList;
 /**
  * Created by sincalza on 26/05/2017.
  */
-public class BasicTaxCalculator implements TaxCalculator {
+public class BasicTaxCalculator extends RoundOffToFiveCentsTaxCalculator {
 
     private static final List<Type> PRODUCT_TYPES_EXCEPTION = asList(food, medicinal, book);
 
     @Override
-    public BigDecimal apply(Product product) {
+    public BigDecimal doApply(Product product) {
         if (isAProductInException(product)) return ZERO;
-        return roundOffToFiveCents(product.getPriceOfPercentOf(TEN));
+        return product.getPriceOfPercentOf(TEN);
     }
 
     private boolean isAProductInException(Product product) {

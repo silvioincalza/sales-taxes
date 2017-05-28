@@ -66,7 +66,7 @@ public class AcceptanceCriteriaTest {
 //        1 imported bottle of perfume at 47.50
 
 
-    //        Output 2:
+//        Output 2:
 //        1 imported box of chocolates: 10.50
 //        1 imported bottle of perfume: 54.65
 //        Sales Taxes: 7.65
@@ -99,7 +99,7 @@ public class AcceptanceCriteriaTest {
 //        1 packet of headache pills at 9.75
 //        1 box of imported chocolates at 11.25
 
-    //        Output 3:
+//        Output 3:
 //        1 imported bottle of perfume: 32.19
 //        1 bottle of perfume: 20.89
 //        1 packet of headache pills: 9.75

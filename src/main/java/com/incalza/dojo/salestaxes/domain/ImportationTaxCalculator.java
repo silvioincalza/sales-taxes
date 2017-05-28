@@ -2,19 +2,18 @@ package com.incalza.dojo.salestaxes.domain;
 
 import java.math.BigDecimal;
 
-import static com.incalza.dojo.salestaxes.utils.MathOperationUtils.roundOffToFiveCents;
 import static java.math.BigDecimal.ZERO;
 
 /**
  * Created by sincalza on 26/05/2017.
  */
-public class ImportationTaxCalculator implements TaxCalculator {
+public class ImportationTaxCalculator extends RoundOffToFiveCentsTaxCalculator {
 
     private static final BigDecimal FIVE = BigDecimal.valueOf(5.0);
 
     @Override
-    public BigDecimal apply(Product product) {
+    public BigDecimal doApply(Product product) {
         if (!product.isImported()) return ZERO;
-        return roundOffToFiveCents(product.getPriceOfPercentOf(FIVE));
+        return product.getPriceOfPercentOf(FIVE);
     }
 }
