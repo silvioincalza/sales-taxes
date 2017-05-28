@@ -1,38 +1,32 @@
 package com.incalza.dojo.salestaxes.domain;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.nio.CharBuffer;
+import java.io.Reader;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+import static java.util.Optional.ofNullable;
+import static java.util.regex.Pattern.compile;
 
 /**
  * Created by sincalza on 27/05/2017.
  */
-public class TextualProductReader implements ProductReader<String> {
+public class TextualProductReader implements ProductReader {
 
-    static final int BUFFERING_CAPACITY = 1024;
-    private final InputStreamReader inputStreamReader;
+    private final Scanner scanner;
+    private static final Pattern PRODUCT_LINE = compile("((\\d)+[\\s\\t]([a-zA-Z])+[\\s\\t]at[\\s\\t](\\d{1,11}(.\\d{1,2})?))");
+    private final RegExpProductParser regExpProductParser = new RegExpProductParser();
 
-    public TextualProductReader(InputStreamReader inputStreamReader) {
-        this.inputStreamReader = inputStreamReader;
+    public TextualProductReader(Reader reader) {
+        this.scanner = new Scanner(reader);
     }
 
     @Override
-    public String read() {
-        try {
-            final StringWriter stringWriter = new StringWriter();
-            final CharBuffer charBuffer = CharBuffer.allocate(BUFFERING_CAPACITY);
-            int read;
-            while ((read = inputStreamReader.read(charBuffer)) >= 0) {
-                stringWriter.write(charBuffer.array(), 0, read);
-                System.out.println(read);
-            }
-            System.out.println(stringWriter.getBuffer().toString());
-            return stringWriter.getBuffer().toString();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new RuntimeException("product not readied");
+    public Optional<Product> read() {
+        return regExpProductParser.parse(
+                ofNullable(
+                        scanner.findInLine(PRODUCT_LINE)
+                )
+        );
     }
 }

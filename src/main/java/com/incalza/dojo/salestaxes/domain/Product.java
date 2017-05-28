@@ -8,6 +8,8 @@ import java.util.Objects;
  */
 public class Product {
 
+
+
     private static final BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100.0);
 
     public enum Type {
