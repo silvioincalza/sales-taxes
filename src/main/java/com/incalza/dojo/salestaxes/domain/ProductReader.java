@@ -7,6 +7,7 @@ import java.util.Optional;
  */
 public interface ProductReader {
 
-    Optional<Product> read();
+    Optional<Product> read() throws NoSuchProductException;
 
+    boolean hasNext();
 }

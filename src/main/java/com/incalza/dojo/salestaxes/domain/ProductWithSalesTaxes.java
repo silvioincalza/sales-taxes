@@ -9,7 +9,7 @@ public class ProductWithSalesTaxes extends Product {
     private TaxCalculator taxCalculator;
 
     public ProductWithSalesTaxes(Product product, TaxCalculator taxCalculator) {
-        super(product.getPrice(), product.getDescription(), product.getType(), product.isImported());
+        super(product.getDescription(), product.getType(), product.isImported(), product.getPrice());
         this.taxCalculator = taxCalculator;
     }
 

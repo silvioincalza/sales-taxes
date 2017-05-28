@@ -8,7 +8,7 @@ import static java.math.BigDecimal.ZERO;
 /**
  * Created by sincalza on 26/05/2017.
  */
-public class ImportTaxCalculator implements TaxCalculator {
+public class ImportationTaxCalculator implements TaxCalculator {
 
     private static final BigDecimal FIVE = BigDecimal.valueOf(5.0);
 

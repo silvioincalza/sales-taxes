@@ -8,5 +8,4 @@ import java.util.Optional;
  */
 public interface ProductParser<T extends Serializable> {
     Optional<Product> parse(Optional<T> input);
-
 }

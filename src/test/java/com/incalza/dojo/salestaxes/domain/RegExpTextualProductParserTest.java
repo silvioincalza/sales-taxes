@@ -5,17 +5,15 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static com.incalza.dojo.salestaxes.domain.Product.Type.*;
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
+import static java.util.Optional.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by sincalza on 28/05/2017.
  */
-public class RegExpProductParserTest {
+public class RegExpTextualProductParserTest {
 
-    private ProductParser<String> productParser = new RegExpProductParser();
+    private ProductParser<String> productParser = new RegExpTextualProductParser();
 
     @Test
     public void nothingToParse() throws Exception {
@@ -41,7 +39,7 @@ public class RegExpProductParserTest {
     @Test
     public void parseImportedProduct() throws Exception {
         assertThat(productParser.parse(of("1 box of imported chocolates at 10.10")).get())
-                .isEqualTo(new Product(new BigDecimal("10.10"), "box of imported chocolates", food, true));
+                .isEqualTo(new Product("box of imported chocolates", food, true, new BigDecimal("10.10")));
     }
 
     @Test

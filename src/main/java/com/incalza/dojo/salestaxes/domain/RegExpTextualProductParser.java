@@ -12,10 +12,10 @@ import static java.util.regex.Pattern.compile;
 /**
  * Created by sincalza on 28/05/2017.
  */
-public class RegExpProductParser implements ProductParser<String> {
-    public static final String REG_EXP_NUM_OF_PRODUCTS = "(\\d{1,3})";
-    public static final String REG_EXP_DESCRIPTION = "([a-zA-Z\\s_-]+)";
-    public static final String REG_EXP_PRICE = "(\\d{1,11}(.\\d{1,2})?)";
+public class RegExpTextualProductParser implements ProductParser<String> {
+    private static final String REG_EXP_NUM_OF_PRODUCTS = "(\\d{1,3})";
+    private static final String REG_EXP_DESCRIPTION = "([a-zA-Z\\s_-]+)";
+    private static final String REG_EXP_PRICE = "(\\d{1,11}(.\\d{1,2})?)";
     public static final Pattern REG_EXP_PRODUCT_LINE = compile("(" + REG_EXP_NUM_OF_PRODUCTS +
             "[\\s\\t]" + REG_EXP_DESCRIPTION + "[\\s\\t]at[\\s\\t]" + REG_EXP_PRICE + ")");
 
@@ -26,7 +26,7 @@ public class RegExpProductParser implements ProductParser<String> {
             if (!matcher.find()) return empty();
             final String description = matcher.group(3);
             final String price = matcher.group(4);
-            return of(new Product(new BigDecimal(price), description, parseType(description), isImported(description)));
+            return of(new Product(description, parseType(description), isImported(description), new BigDecimal(price)));
         });
     }
 
@@ -40,7 +40,6 @@ public class RegExpProductParser implements ProductParser<String> {
         if (description.contains("pill")) return Product.Type.medicinal;
         if (description.contains("perfume")) return Product.Type.perfume;
         if (description.contains("music")) return Product.Type.music;
-
         return Product.Type.not_available;
     }
 

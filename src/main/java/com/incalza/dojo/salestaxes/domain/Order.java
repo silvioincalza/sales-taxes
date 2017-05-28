@@ -4,16 +4,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static java.math.BigDecimal.ZERO;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * Created by sincalza on 27/05/2017.
  */
-public class Order {
+public class Order extends Model {
 
     private final List<ProductWithSalesTaxes> products;
 
     public Order(List<ProductWithSalesTaxes> products) {
-        this.products = products;
+        this.products = unmodifiableList(products);
     }
 
     public BigDecimal total() {

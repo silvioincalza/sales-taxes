@@ -9,7 +9,6 @@ import static java.util.stream.Collectors.toList;
  */
 public class OrderFactory {
 
-
     private TaxCalculator taxCalculator;
 
     public OrderFactory(TaxCalculator taxCalculator) {

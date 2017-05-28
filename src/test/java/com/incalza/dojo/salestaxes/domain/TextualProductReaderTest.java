@@ -16,8 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TextualProductReaderTest {
 
-    public static final String DESCRIPTION_EXPECTED = "test";
-    public static final String UTF_8 = "UTF-8";
+    private static final String UTF_8 = "UTF-8";
 
     @Test
     public void successful() throws Exception {
@@ -25,7 +24,7 @@ public class TextualProductReaderTest {
         final String input = expectedProductLine + "\nfngjlsdf;sn;gfknsjkdnf;aks\ngl;aksfl;gajld;" +
                 "jqcw[oirugn[oqmrpoghuqcefqw[gwrjmg,qe[cj,rei[ogcjeh ]og2t3umt40gr2cgipw;lj'mp3qew[oipxqrlmgj2]" +
                 "premogdj,ilqrxct1mhqcwpiual.,klnxem1pfilna;HMCEFNQULH  Andl;c  jfmq[herxoinl;cke   f;/";
-        ProductReader productReader = new TextualProductReader(createReader(input));
+        ProductReader productReader = new TextualProductReader(createReader(input), new RegExpTextualProductParser());
         assertThat(productReader.read().get())
                 .isNotNull()
                 .isEqualTo(new Product(new BigDecimal("12.49"), "book", Product.Type.book));
@@ -38,8 +37,27 @@ public class TextualProductReaderTest {
         final String input = "fqer\'tvk23cpqoun4top2r3lqkwj s,ahfiluxqkwj,heDNFXPI\nfngjlsdf;sn;gfknsjkdnf;aks\ngl;aksfl;gajld;" +
                 "jqcw[oirugn[oqmrpoghuqcefqw[gwrjmg,qe[cj,rei[ogcjeh ]og2t3umt40gr2cgipw;lj'mp3qew[oipxqrlmgj2]" +
                 "premogdj,ilqrxct1mhqcwpiual.,klnxem1pfilna;HMCEFNQULH  Andl;c  jfmq[herxoinl;cke   f;/";
-        ProductReader productReader = new TextualProductReader(createReader(input));
-        assertThat(productReader.read()).isEmpty();
+        ProductReader productReader = new TextualProductReader(createReader(input), new RegExpTextualProductParser());
+
+        assertThat(productReader.read())
+                .isEmpty();
+    }
+
+    @Test(expected = NoSuchProductException.class)
+    public void noSuchProductToRead() throws Exception {
+        final String input = "1 book at 12.49\naaaa\naaaaaaa";
+        ProductReader productReader = new TextualProductReader(createReader(input), new RegExpTextualProductParser());
+        assertThat(productReader.read())
+                .isNotEmpty();
+        assertThat(productReader.read())
+                .isEmpty();
+        assertThat(productReader.hasNext())
+                .isTrue();
+        assertThat(productReader.read())
+                .isEmpty();
+        assertThat(productReader.hasNext())
+                .isFalse();
+        productReader.read();
     }
 
 

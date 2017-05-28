@@ -13,20 +13,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by sincalza on 27/05/2017.
  */
-public class ImportTaxCalculatorTest {
+public class ImportationTaxCalculatorTest {
 
-    private TaxCalculator taxCalculator = new ImportTaxCalculator();
+    private TaxCalculator taxCalculator = new ImportationTaxCalculator();
 
     @Test
     public void whenProductIsBookThenNotApplySaleTax() throws Exception {
-        assertThat(taxCalculator.apply(new Product(TEN, "", book, false)))
+        assertThat(taxCalculator.apply(new Product("", book, false, TEN)))
                 .isEqualByComparingTo(ZERO);
     }
 
 
     @Test
     public void whenProductIsAGoodsTheApplySaleTax() throws Exception {
-        assertThat(taxCalculator.apply(new Product(TEN, "", perfume, true)))
+        assertThat(taxCalculator.apply(new Product("", perfume, true, TEN)))
                 .isEqualByComparingTo(new BigDecimal(0.50));
     }
 
