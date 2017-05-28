@@ -26,13 +26,20 @@ public class RegExpProductParser implements ProductParser<String> {
             if (!matcher.find()) return empty();
             final String description = matcher.group(3);
             final String price = matcher.group(4);
-            return of(new Product(new BigDecimal(price), description, parseType(description), description.contains("imported")));
+            return of(new Product(new BigDecimal(price), description, parseType(description), isImported(description)));
         });
+    }
+
+    private boolean isImported(String description) {
+        return description.contains("imported");
     }
 
     private Product.Type parseType(String description) {
         if (description.contains("book")) return Product.Type.book;
         if (description.contains("chocolate")) return Product.Type.food;
+        if (description.contains("pill")) return Product.Type.medicinal;
+        if (description.contains("perfume")) return Product.Type.perfume;
+        if (description.contains("music")) return Product.Type.music;
 
         return Product.Type.not_available;
     }
