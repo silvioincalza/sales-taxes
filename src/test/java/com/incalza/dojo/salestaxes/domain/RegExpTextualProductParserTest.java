@@ -39,7 +39,7 @@ public class RegExpTextualProductParserTest {
     @Test
     public void parseImportedProduct() throws Exception {
         assertThat(productParser.parse(of("1 box of imported chocolates at 10.10")).get())
-                .isEqualTo(new Product("box of imported chocolates", food, true, new BigDecimal("10.10")));
+                .isEqualTo(new Product(new BigDecimal("10.10"), "box of imported chocolates", food, true));
     }
 
     @Test

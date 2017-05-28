@@ -7,7 +7,6 @@ import java.math.BigDecimal;
  */
 public class Product extends Model {
 
-
     private static final BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100.0);
 
     public enum Type {
@@ -24,7 +23,7 @@ public class Product extends Model {
     private final Type type;
     private boolean imported;
 
-    public Product(String description, Type type, boolean imported, BigDecimal price) {
+    public Product(BigDecimal price, String description, Type type, boolean imported) {
         this.description = description;
         this.price = price;
         this.type = type;
@@ -32,7 +31,7 @@ public class Product extends Model {
     }
 
     public Product(BigDecimal price, String description, Type type) {
-        this(description, type, false, price);
+        this(price, description, type, false);
     }
 
     public String getDescription() {

@@ -26,7 +26,7 @@ public class RegExpTextualProductParser implements ProductParser<String> {
             if (!matcher.find()) return empty();
             final String description = matcher.group(3);
             final String price = matcher.group(4);
-            return of(new Product(description, parseType(description), isImported(description), new BigDecimal(price)));
+            return of(new Product(new BigDecimal(price), description, parseType(description), isImported(description)));
         });
     }
 

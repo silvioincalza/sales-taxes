@@ -19,14 +19,14 @@ public class ImportationTaxCalculatorTest {
 
     @Test
     public void whenProductIsBookThenNotApplySaleTax() throws Exception {
-        assertThat(taxCalculator.apply(new Product("", book, false, TEN)))
+        assertThat(taxCalculator.apply(new Product(TEN, "", book, false)))
                 .isEqualByComparingTo(ZERO);
     }
 
 
     @Test
     public void whenProductIsAGoodsTheApplySaleTax() throws Exception {
-        assertThat(taxCalculator.apply(new Product("", perfume, true, TEN)))
+        assertThat(taxCalculator.apply(new Product(TEN, "", perfume, true)))
                 .isEqualByComparingTo(new BigDecimal(0.50));
     }
 
